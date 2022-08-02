@@ -69,30 +69,15 @@ RUN EXTS=`curl https://extdist.wmflabs.org/dist/extensions/ | awk 'BEGIN { FS = 
       echo "Installing https://extdist.wmflabs.org/dist/extensions/$FILENAME"; \
       curl -Ls https://extdist.wmflabs.org/dist/extensions/$FILENAME | tar xz -C /var/www/html/extensions; \
     done \
-    && echo "Installing https://github.com/ubc/EmbedPage/archive/v2.0.2.tar.gz" \
-    && mkdir /var/www/html/extensions/EmbedPage \
-    && curl -Ls https://github.com/ubc/EmbedPage/archive/v2.0.1.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/EmbedPage \
-    && echo "Installing https://github.com/ubc/mediawiki-extensions-UploadWizard/archive/mw1.35.tar.gz" \
-    && mkdir /var/www/html/extensions/UploadWizard \
-    && curl -Ls https://github.com/ubc/mediawiki-extensions-UploadWizard/archive/mw1.35.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/UploadWizard \
-    && echo "Installing https://github.com/ubc/mediawiki-extensions-UWUBCMessages/archive/master.tar.gz" \
-    && mkdir /var/www/html/extensions/UWUBCMessages \
-    && curl -Ls https://github.com/ubc/mediawiki-extensions-UWUBCMessages/archive/master.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/UWUBCMessages \
+#    && echo "Installing https://github.com/ubc/EmbedPage/archive/v2.0.2.tar.gz" \
+#    && mkdir /var/www/html/extensions/EmbedPage \
+#    && curl -Ls https://github.com/ubc/EmbedPage/archive/v2.0.1.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/EmbedPage \
     && echo "Installing https://github.com/smarty-php/smarty/archive/v3.1.44.tar.gz" \
     && mkdir -p /var/www/html/extensions/Widgets/smarty \
     && curl -Ls https://github.com/smarty-php/smarty/archive/v3.1.44.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/Widgets/smarty \
     && echo "Installing https://github.com/wikimedia/mediawiki-extensions-GoogleAnalyticsMetrics/archive/master.tar.gz" \
     && mkdir -p /var/www/html/extensions/GoogleAnalyticsMetrics \
     && curl -Ls https://github.com/wikimedia/mediawiki-extensions-GoogleAnalyticsMetrics/archive/master.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/GoogleAnalyticsMetrics \
-    && echo "Installing https://github.com/ubc/mediawiki-extensions-caliper/archive/v2.0.3.tar.gz" \
-    && mkdir -p /var/www/html/extensions/caliper \
-    && curl -Ls https://github.com/ubc/mediawiki-extensions-caliper/archive/v2.0.3.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/caliper \
-    && echo "Installing https://github.com/ubc/mediawiki-extensions-ubcauth/archive/master.tar.gz" \
-    && mkdir -p /var/www/html/extensions/UBCAuth\
-    && curl -Ls https://github.com/ubc/mediawiki-extensions-ubcauth/archive/master.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/UBCAuth \
-    && echo "Installing https://github.com/ubc/mediawiki-extensions-AutoCreatedUserRedirector/archive/master.tar.gz" \
-    && mkdir -p /var/www/html/extensions/AutoCreatedUserRedirector \
-    && curl -Ls https://github.com/ubc/mediawiki-extensions-AutoCreatedUserRedirector/archive/master.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/AutoCreatedUserRedirector \
     && echo "Installing https://github.com/Universal-Omega/DynamicPageList3/archive/REL1_35.tar.gz" \
     && mkdir -p /var/www/html/extensions/DynamicPageList \
     && curl -Ls https://github.com/Universal-Omega/DynamicPageList3/archive/REL1_35.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/DynamicPageList \
