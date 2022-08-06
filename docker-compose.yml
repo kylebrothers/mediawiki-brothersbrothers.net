@@ -9,7 +9,7 @@ services:
     ports:
       - 3306:3306
   web: &app
-    image: ubcctlt/mediawiki
+    image: kylebrothers/mywiki:latest
     build: .
     ports:
       - 8080:80
@@ -35,9 +35,10 @@ services:
       - MEDIAWIKI_SITE_NAME=My Awesome Wiki
       - MEDIAWIKI_DB_HOST=db
       - MEDIAWIKI_DB_PASSWORD=password
+      - MEDIAWIKI_UPGRADE_KEY=upgradekey
       # uncomment 'MEDIAWIKI_ENABLE_SSL' to enable SSL support
       # - MEDIAWIKI_ENABLE_SSL=true
-      - MEDIAWIKI_EXTENSIONS=VisualEditor,WikiEditor,ParserFunctions,Cite,TemplateData,Scribunto,InputBox,Widgets,Maps,Math,LiquidThreads,Variables,RightFunctions,PageInCat,CategoryTree,LabeledSectionTransclusion,UserPageEditProtection,Quiz,UploadWizard,Collection,DynamicPageList,EmbedPage,UWUBCMessages,googleAnalytics,Renameuser,caliper,DeleteBatch,LinkTarget,HitCounters
+      - MEDIAWIKI_EXTENSIONS=VisualEditor,WikiEditor,ParserFunctions,Cite,TemplateData,Scribunto,InputBox,Widgets,Maps,Math,LiquidThreads,Variables,RightFunctions,PageInCat,CategoryTree,LabeledSectionTransclusion,UserPageEditProtection,Quiz,UploadWizard,Collection,DynamicPageList,EmbedPage,UWUBCMessages,googleAnalytics,Renameuser,caliper,DeleteBatch,LinkTarget,HitCounters,GTag
       - MEDIAWIKI_ALLOW_SITE_CSS_ON_RESTRICTED_PAGES=true
       - PARSOID_DOMAIN=localhost
       - RESTBASE_URL=http://nodeservices:7231
@@ -67,7 +68,7 @@ services:
       #- MEDIAWIKI_MEMCACHED_SERVERS=["memcached:11211"]
       # uncomment to specify the wgUploadPath
       # - MEDIAWIKI_UPLOAD_PATH=
-      #- GOOGLE_ANALYTICS_UA=UA-XXXXXXX-XX
+      #- GOOGLE_ANALYTICS_ID=UA-XXXXXXX-XX
       # GoogleAnalyticsMetrics: https://www.mediawiki.org/wiki/Extension:GoogleAnalyticsMetrics
       #- GOOGLE_ANALYTICS_METRICS_ALLOWED
       #- GOOGLE_ANALYTICS_METRICS_PATH
