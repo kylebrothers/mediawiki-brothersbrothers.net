@@ -318,7 +318,7 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Se
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticMetaTags') !== false) {
-    require_once "$IP/extensions/SemanticMetaTags/SemanticMetaTags.php";
+    require_once "$IP/extensions/SemanticInterlanguageLinks/SemanticMetaTags.php";
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticResultFormats') !== false) {

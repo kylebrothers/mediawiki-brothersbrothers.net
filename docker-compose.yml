@@ -38,7 +38,7 @@ services:
       - MEDIAWIKI_UPGRADE_KEY=upgradekey
       # uncomment 'MEDIAWIKI_ENABLE_SSL' to enable SSL support
       # - MEDIAWIKI_ENABLE_SSL=true
-      - MEDIAWIKI_EXTENSIONS=VisualEditor,WikiEditor,ParserFunctions,Cite,TemplateData,Scribunto,InputBox,Maps,Math,LiquidThreads,Variables,RightFunctions,PageInCat,CategoryTree,Collection,DynamicPageList,Renameuser,DeleteBatch,LinkTarget,HitCounters,Arrays,HeaderTabs,HTMLets,ImageMap,PageSchemas,XSL
+      - MEDIAWIKI_EXTENSIONS=VisualEditor,WikiEditor,ParserFunctions,Cite,TemplateData,Scribunto,Maps,Math,LiquidThreads,Variables,RightFunctions,PageInCat,CategoryTree,Collection,DynamicPageList,DeleteBatch,LinkTarget,HitCounters,Arrays,HeaderTabs,HTMLets,ImageMap,PageSchemas,XSL,SemanticCite,SemanticCompoundQueries,SemanticExtraSpecialProperties,SemanticInterlanguageLinks,SemanticMetaTags,SemanticResultFormats,SemanticScribunto,Validator,DataTransfer,PageForms,Bootstrap
       - MEDIAWIKI_ALLOW_SITE_CSS_ON_RESTRICTED_PAGES=true
       - PARSOID_DOMAIN=localhost
       - RESTBASE_URL=http://nodeservices:7231
