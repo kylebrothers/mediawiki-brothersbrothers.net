@@ -66,7 +66,7 @@ RUN curl -L https://getcomposer.org/composer-1.phar --output composer.phar \
 COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/fixedhead.xml
 
 RUN EXTS=`curl https://extdist.wmflabs.org/dist/extensions/ | awk 'BEGIN { FS = "\""  } ; {print $2}'` \
-    && for i in VisualEditor Scribunto LiquidThreads Cite WikiEditor PluggableAuth ParserFunctions TemplateData InputBox Widgets Variables RightFunctions PageInCat CategoryTree LabeledSectionTransclusion UserPageEditProtection Collection googleAnalytics DeleteBatch LinkTarget HitCounters Arrays HeaderTabs HTMLets ImageMap PageSchemas XSL; do \
+    && for i in VisualEditor Scribunto Cite WikiEditor ParserFunctions TemplateData InputBox Variables CategoryTree LabeledSectionTransclusion UserPageEditProtection Collection googleAnalytics DeleteBatch LinkTarget HitCounters Arrays HeaderTabs HTMLets ImageMap PageSchemas XSL; do \
       FILENAME=`echo "$EXTS" | grep ^${i}-REL${WIKI_VERSION_STR}`; \
       echo "Installing https://extdist.wmflabs.org/dist/extensions/$FILENAME"; \
       curl -Ls https://extdist.wmflabs.org/dist/extensions/$FILENAME | tar xz -C /var/www/html/extensions; \

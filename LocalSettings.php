@@ -333,17 +333,8 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'xs
     require_once "$IP/extensions/xsl/xsl.php";
 }
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'UserPageEditProtection') !== false) {
-    wfLoadExtension( 'UserPageEditProtection' );
-    $wgOnlyUserEditUserPage = true;
-}
-
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Collection') !== false) {
     require_once "$IP/extensions/Collection/Collection.php";
-}
-
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'DynamicPageList') !== false) {
-    wfLoadExtension( 'DynamicPageList' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'LinkTarget') !== false) {
@@ -353,8 +344,6 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Li
 
 @include('/conf/CustomSettings.php');
 
-@include('CustomHooks.php');
-
 if (filter_var(loadenv('DEBUG', false), FILTER_VALIDATE_BOOLEAN)) {
     error_reporting(-1);
     ini_set( 'display_errors', 1  );
@@ -362,10 +351,6 @@ if (filter_var(loadenv('DEBUG', false), FILTER_VALIDATE_BOOLEAN)) {
     $wgCacheDirectory = false;
     $wgDebugLogFile = "/tmp/mw-debug-{$wgDBname}.log";
 }
-
-# UBC Wiki Books - a setting to allow books to be saved as collection of pages
-$wgGroupPermissions['user']['collectionsaveascommunitypage'] = true;
-$wgGroupPermissions['user']['collectionsaveasuserpage'] = true;
 
 # redirect auto created users to specific page when they login for the first time
 if ( getenv( 'AUTO_CREATED_USER_REDIRECT' ) ) {
