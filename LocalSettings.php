@@ -246,37 +246,6 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Vi
     // );
 }
 
-if (getenv('RESTBASE_URL')) {
-    # RESTBase
-    # ref: https://www.mediawiki.org/wiki/Extension:VisualEditor#RESTBase_setup_for_switching
-    $wgVisualEditorParsoidAutoConfig = false;
-    $wgVirtualRestConfig['modules']['restbase'] = [
-            # used internally by wiki, so it can be docker/k8s service name
-            'url' => getenv('RESTBASE_URL') ? getenv('RESTBASE_URL') : 'http://localhost:7231',
-            'domain' => getenv('PARSOID_DOMAIN') ? getenv('PARSOID_DOMAIN') : 'localhost',
-            'parsoidCompat' => false
-        ];
-    # used in browser, so it has to be public accessible, using proxy to forward request to Restbase
-    $wgVisualEditorFullRestbaseURL = $wgServer . '/api/rest_';
-    $wgVisualEditorRestbaseURL = $wgVisualEditorFullRestbaseURL . 'v1/page/html/';
-}
-
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Math') !== false) {
-    # Math
-    # ref: https://www.mediawiki.org/wiki/Extension:Mat://www.mediawiki.org/wiki/Extension:Math
-
-    $wgDefaultUserOptions['math'] = 'mathml';
-
-    # used in browser, so it has to be public accessible, using proxy to forward request to Restbase
-    $wgMathFullRestbaseURL= $wgServer . '/api/rest_';
-}
-
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Scribunto') !== false) {
-    # Scribunto
-    wfLoadExtension( 'Scribunto' );
-    $wgScribuntoDefaultEngine = 'luastandalone';
-}
-
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Arrays') !== false) {
     require_once "$IP/extensions/Arrays/Arrays.php";
 }
@@ -285,20 +254,40 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Bo
     require_once "$IP/extensions/Bootstrap/Bootstrap.php";
 }
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'GraphViz') !== false) {
-    require_once "$IP/extensions/GraphViz/GraphViz.php";
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'DataTransfer') !== false) {
+    wfLoadExtension( 'DataTransfer' );
 }
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Maps') !== false) {
-    require_once "$IP/extensions/Maps/Maps.php";
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'HeaderTabs') !== false) {
+    wfLoadExtension( 'HeaderTabs' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'HTMLets') !== false) {
     require_once "$IP/extensions/HTMLets/HTMLets.php";
 }
 
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'ImageMap') !== false) {
+    wfLoadExtension( 'ImageMap' );
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Maps') !== false) {
+    require_once "$IP/extensions/Maps/Maps.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'PageForms') !== false) {
+    wfLoadExtension( 'PageForms' );
+}
+
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'PageSchemas') !== false) {
     require_once "$IP/extensions/PageSchemas/PageSchemas.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'PageForms') !== false) {
+    wfLoadExtension( 'ParserFunctions' );
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Scribunto') !== false) {
+    wfLoadExtension( 'Scribunto' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticCite') !== false) {
@@ -317,12 +306,20 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Se
     require_once "$IP/extensions/SemanticInterlanguageLinks/SemanticInterlanguageLinks.php";
 }
 
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticMediaWiki') !== false) {
+    require_once "$IP/extensions/SemanticMediaWiki/SemanticMediaWiki.php";
+}
+
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticMetaTags') !== false) {
-    require_once "$IP/extensions/SemanticInterlanguageLinks/SemanticMetaTags.php";
+    require_once "$IP/extensions/SemanticInterMetaTags/SemanticMetaTags.php";
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticResultFormats') !== false) {
     require_once "$IP/extensions/SemanticResultFormats/SemanticResultFormats.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticScribunto') !== false) {
+    require_once "$IP/extensions/SemanticScribunto/SemanticScribunto.php";
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Validator') !== false) {
@@ -333,15 +330,6 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'xs
     require_once "$IP/extensions/xsl/xsl.php";
 }
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Collection') !== false) {
-    require_once "$IP/extensions/Collection/Collection.php";
-}
-
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'LinkTarget') !== false) {
-    wfLoadExtension( 'LinkTarget' );
-    $wgLinkTargetParentClasses = array('linkexternal');
-}
-
 @include('/conf/CustomSettings.php');
 
 if (filter_var(loadenv('DEBUG', false), FILTER_VALIDATE_BOOLEAN)) {
@@ -350,12 +338,6 @@ if (filter_var(loadenv('DEBUG', false), FILTER_VALIDATE_BOOLEAN)) {
     $wgShowExceptionDetails = true;
     $wgCacheDirectory = false;
     $wgDebugLogFile = "/tmp/mw-debug-{$wgDBname}.log";
-}
-
-# redirect auto created users to specific page when they login for the first time
-if ( getenv( 'AUTO_CREATED_USER_REDIRECT' ) ) {
-    wfLoadExtension( 'AutoCreatedUserRedirector' );
-    $wgAutoCreatedUserRedirect = getenv( 'AUTO_CREATED_USER_REDIRECT' );
 }
 
 # Give Bureaucrats delete permission
