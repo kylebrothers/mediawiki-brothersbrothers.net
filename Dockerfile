@@ -63,6 +63,8 @@ COPY ParsoidHandler_custom_1_35.php /var/www/html/vendor/wikimedia/parsoid/exten
 RUN curl -L https://getcomposer.org/composer-1.phar --output composer.phar \
     && php composer.phar install --no-dev
 
+COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/fixedhead.xml
+
 RUN EXTS=`curl https://extdist.wmflabs.org/dist/extensions/ | awk 'BEGIN { FS = "\""  } ; {print $2}'` \
     && for i in VisualEditor Scribunto LiquidThreads Cite WikiEditor PluggableAuth ParserFunctions TemplateData InputBox Widgets Variables RightFunctions PageInCat CategoryTree LabeledSectionTransclusion UserPageEditProtection Collection googleAnalytics DeleteBatch LinkTarget HitCounters Arrays HeaderTabs HTMLets ImageMap PageSchemas XSL; do \
       FILENAME=`echo "$EXTS" | grep ^${i}-REL${WIKI_VERSION_STR}`; \

@@ -19,7 +19,7 @@ function loadenv($envName, $default = "") {
 ## Uncomment this to disable output compression
 $wgDisableOutputCompression = true;
 
-$wgSitename = loadenv('MEDIAWIKI_SITE_NAME', 'MediaWiki');
+$wgSitename = loadenv('MEDIAWIKI_SITE_NAME', 'BrothersBrothers');
 if (getenv('MEDIAWIKI_META_NAMESPACE') !== false) {
     $wgMetaNamespace = loadenv('MEDIAWIKI_META_NAMESPACE', $wgSitename);
 }
@@ -40,12 +40,12 @@ $wgResourceBasePath = $wgScriptPath;
 
 ## The URL path to the logo.  Make sure you change this from the default,
 ## or else you'll overwrite your logo when you upgrade!
-$wgLogo = loadenv('MEDIAWIKI_LOGO', "$wgResourceBasePath/resources/assets/wiki.png");
+$wgLogo = loadenv('MEDIAWIKI_LOGO', "$wgResourceBasePath/images/logo.png");
 
 ## UPO means: this is also a user preference option
 
-$wgEnableEmail = filter_var(loadenv('MEDIAWIKI_ENABLE_EMAIL', true), FILTER_VALIDATE_BOOLEAN);
-$wgEnableUserEmail = filter_var(loadenv('MEDIAWIKI_ENABLE_USER_EMAIL', true), FILTER_VALIDATE_BOOLEAN); # UPO
+$wgEnableEmail = filter_var(loadenv('MEDIAWIKI_ENABLE_EMAIL', false), FILTER_VALIDATE_BOOLEAN);
+$wgEnableUserEmail = filter_var(loadenv('MEDIAWIKI_ENABLE_USER_EMAIL', false), FILTER_VALIDATE_BOOLEAN); # UPO
 
 $wgEmergencyContact = loadenv('MEDIAWIKI_EMERGENCY_CONTACT', "apache@localhost");
 $wgPasswordSender = loadenv('MEDIAWIKI_PASSWORD_SENDER', "apache@localhost");
@@ -60,12 +60,12 @@ $wgEmailAuthentication = true;
 ## Database settings
 $wgDBtype = loadenv('MEDIAWIKI_DB_TYPE', "mysql");
 $wgDBserver = loadenv('MEDIAWIKI_DB_HOST', "db");
-$wgDBname = loadenv('MEDIAWIKI_DB_NAME', "mediawiki");
+$wgDBname = loadenv('MEDIAWIKI_DB_NAME', "wikidb");
 $wgDBuser = loadenv('MEDIAWIKI_DB_USER', "root");
 $wgDBpassword = loadenv('MEDIAWIKI_DB_PASSWORD', "mediawikipass");
 
 # MySQL specific settings
-$wgDBprefix = loadenv('MEDIAWIKI_DB_PREFIX');
+$wgDBprefix = loadenv('MEDIAWIKI_DB_PREFIX', "");
 
 # MySQL table options to use during installation or update
 $wgDBTableOptions = loadenv('MEDIAWIKI_DB_TABLE_OPTIONS', "ENGINE=InnoDB, DEFAULT CHARSET=binary");
@@ -96,7 +96,8 @@ switch ($wgMainCacheType) {
 ## is writable, then set this to true:
 $wgEnableUploads = true;
 $wgUseImageMagick = true;
-#$wgImageMagickConvertCommand = "/usr/bin/convert";
+$wgImageMagickConvertCommand = "/usr/bin/convert";
+$wgFileExtensions = array('png', 'gif', 'jpg', 'jpeg', 'doc', 'xls', 'pdf', 'ppt', 'tiff', 'bmp', 'docx', 'xlsx', 'pptx', 'ps');
 #$wgGenerateThumbnailOnParse = false;
 
 # InstantCommons allows wiki to use images from https://commons.wikimedia.org
@@ -120,7 +121,7 @@ $wgCacheDirectory = loadenv('MEDIAWIKI_CACHE_DIRECTORY', false);
 # Site language code, should be one of the list in ./languages/data/Names.php
 $wgLanguageCode = loadenv('MEDIAWIKI_LANGUAGE', "en");
 
-$wgSecretKey = loadenv('MEDIAWIKI_SECRET_KEY', null);
+$wgSecretKey = loadenv('MEDIAWIKI_SECRET_KEY', "fde4af77bfe31f20dbf5e1d2f872ae5017bcc5a39fdca06f92a1b7cfd44e9db5");
 
 # Changing this will log out all existing sessions.
 $wgAuthenticationTokenVersion = "1";
@@ -144,234 +145,12 @@ $wgDiff3 = "/usr/bin/diff3";
 ## names, ie 'vector', 'monobook':
 $wgDefaultSkin = loadenv('MEDIAWIKI_DEFAULT_SKIN', "chameleon");
 
-# Enabled skins.
-# The following skins were automatically enabled:
-wfLoadSkin( 'Vector' );
+$egChameleonLayoutFile=__DIR__ . '/skins/chameleon/layouts/fixedhead.xml';
 
-// Needed to make UploadWizard work in IE, see https://phabricator.wikimedia.org/T41877
-$wgApiFrameOptions = 'SAMEORIGIN';
-// for UploadWizard to replace existing upload URL
-$wgUploadNavigationUrl = '/wiki/Special:UploadWizard';
-$wgExtensionFunctions[] = function() {
-    $GLOBALS['wgUploadNavigationUrl'] = SpecialPage::getTitleFor( 'UploadWizard'  )->getLocalURL();
-    return true;
-};
+#Allow full HTML on pages
+$wgRawHtml = true;
 
-// UploadWizard License Customization
-$wgUploadWizardConfig = array(
-  'feedbackLink' => false,
-  'alternativeUploadToolsPage' => false,
-  'tutorial' => [
-     // UBC edition of copyright tutorial
-     'template' => 'File:Ubc_copyright_tutorial.png'
-  ],
-  'licenses' => [
-    'cc-by-sa-4.0' => [
-        'msg' => 'mwe-upwiz-license-cc-by-sa-4.0',
-        'icons' => [ 'cc-by', 'cc-sa' ],
-        'url' => '//creativecommons.org/licenses/by-sa/4.0/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    // 2.5 Attribution Canada
-    'cc-by-2.5-ca' => [
-        'msg' => 'mwe-upwiz-license-cc-by-2.5-ca',
-        'icons' => [ 'cc-by', 'cc-sa' ],
-        'url' => '//creativecommons.org/licenses/by/2.5/ca/',
-        'templates' => [ 'cc-by-2.5-ca' ]
-    ],
-
-    'cc-by-2.0' => [
-        'msg' => 'mwe-upwiz-license-cc-by-2.0',
-        'icons' => [ 'cc-by' ],
-        'url' => '//creativecommons.org/licenses/by/2.0/',
-        'templates' => [ 'cc-by-2.0' ]
-    ],
-
-    // 2.5 SA Canada
-    'cc-by-sa-2.5-ca' => [
-        'msg' => 'mwe-upwiz-license-cc-by-sa-2.5-ca',
-        'icons' => [ 'cc-by', 'cc-sa'],
-        'url' => '//creativecommons.org/licenses/by-sa/2.5/ca/',
-        'templates' => [ 'cc-by-sa-2.5-ca' ]
-    ],
-
-    'cc-by-sa-2.0' => [
-        'msg' => 'mwe-upwiz-license-cc-by-sa-2.0',
-        'icons' => [ 'cc-by', 'cc-sa'],
-        'url' => '//creativecommons.org/licenses/by-sa/2.0/',
-        'templates' => [ 'cc-by-sa-2.0' ]
-    ],
-
-    'cc-by-nc-4.0' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-4.0',
-        'icons' => [ 'cc-by', 'cc-nc' ],
-        'url' => '//creativecommons.org/licenses/by-nc/4.0/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    'cc-by-nc-3.0' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-3.0',
-        'icons' => [ 'cc-by', 'cc-nc' ],
-        'url' => '//creativecommons.org/licenses/by-nc/3.0/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    'cc-by-nc-2.5-ca' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-2.5-ca',
-        'icons' => [ 'cc-by', 'cc-nc' ],
-        'url' => '//creativecommons.org/licenses/by-nc/2.5/ca/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    'cc-by-nc-2.5' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-2.5',
-        'icons' => [ 'cc-by', 'cc-nc' ],
-        'url' => '//creativecommons.org/licenses/by-nc/2.5/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    'cc-by-nc-2.0' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-2.0',
-        'icons' => [ 'cc-by', 'cc-nc' ],
-        'url' => '//creativecommons.org/licenses/by-nc/2.0/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    'cc-by-nc-sa-4.0' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-sa-4.0',
-        'icons' => [ 'cc-by', 'cc-nc', 'cc-sa' ],
-        'url' => '//creativecommons.org/licenses/by-nc-sa/4.0/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    'cc-by-nc-sa-3.0' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-sa-3.0',
-        'icons' => [ 'cc-by', 'cc-nc', 'cc-sa' ],
-        'url' => '//creativecommons.org/licenses/by-nc-sa/3.0/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    'cc-by-nc-sa-2.5-ca' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-sa-2.5-ca',
-        'icons' => [ 'cc-by', 'cc-nc', 'cc-sa' ],
-        'url' => '//creativecommons.org/licenses/by-nc-sa/2.5/ca/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    'cc-by-nc-sa-2.5' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-sa-2.5',
-        'icons' => [ 'cc-by', 'cc-nc', 'cc-sa' ],
-        'url' => '//creativecommons.org/licenses/by-nc-sa/2.5/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    'cc-by-nc-sa-2.0' => [
-        'msg' => 'mwe-upwiz-license-cc-by-nc-sa-2.0',
-        'icons' => [ 'cc-by', 'cc-nc', 'cc-sa' ],
-        'url' => '//creativecommons.org/licenses/by-nc-sa/2.0/',
-        'languageCodePrefix' => 'deed.'
-    ],
-
-    // Copyright Canadian Gov
-    'cr-cdn-gov' => [
-        'msg' => 'mwe-upwiz-license-cr-cdn-gov',
-        //'icons' => array( 'cc-by'),
-        'templates' => [ 'cr-cdn-gov' ]
-    ],
-
-    // Expired Canada
-    'cr-cdn-exp' => [
-        'msg' => 'mwe-upwiz-license-cr-cdn-exp',
-        'templates' => [ 'cr-cdn-exp' ]
-    ],
-
-    // UBC
-    'cr-ubc' => [
-        'msg' => 'mwe-upwiz-license-cr-ubc',
-        'templates' => [ 'cr-ubc' ]
-    ],
-    'attribution' => [
-        'msg' => 'mwe-upwiz-license-attribution'
-    ],
-    'none' => [
-        'msg' => 'mwe-upwiz-license-none',
-        'templates' => [ 'subst:uwl' ]
-    ],
-    'generic' => [
-        'msg' => 'mwe-upwiz-license-generic',
-        'templates' => [ 'Generic' ]
-    ]
-  ],
-  'licensing' => [
-    'ownWork' => array(
-      'type' => 'or',
-      'template' => 'self',
-      'defaults' => 'cc-by-sa-4.0',
-      'licenses' => array(
-        'cc-by-sa-4.0',
-        'cc-by-4.0',
-        'cc-zero',
-        'cc-by-nc-4.0',
-        'cc-by-nc-sa-4.0'
-      )
-    ),
-    'thirdParty' => [
-      'type' => 'or',
-      'licenseGroups' => [
-        [
-              // This should be a list of all CC licenses we can reasonably expect to find around the web
-              'head' => 'mwe-upwiz-license-cc-head',
-              'subhead' => 'mwe-upwiz-license-cc-subhead',
-              'licenses' => [
-                  'cc-by-sa-4.0',
-                  'cc-by-sa-3.0',
-                  'cc-by-sa-2.5-ca',
-                  'cc-by-sa-2.5',
-                  'cc-by-sa-2.0',
-                  'cc-by-4.0',
-                  'cc-by-3.0',
-                  'cc-by-2.5-ca',
-                  'cc-by-2.5',
-                  'cc-by-2.0',
-                  'cc-zero',
-                  'cc-by-nc-4.0',
-                  'cc-by-nc-3.0',
-                  'cc-by-nc-2.5-ca',
-                  'cc-by-nc-2.5',
-                  'cc-by-nc-2.0',
-                  'cc-by-nc-sa-4.0',
-                  'cc-by-nc-sa-3.0',
-                  'cc-by-nc-sa-2.5-ca',
-                  'cc-by-nc-sa-2.5',
-                  'cc-by-nc-sa-2.0'
-              ]
-        ],
-        // Canadian Gov license
-        [
-           'head' => 'mwe-upwiz-license-cdngov-head',
-           'licenses' => array(
-              'cr-cdn-gov'
-           )
-        ],
-        // Expire Canadian Public Domain
-        [
-              'head' => 'mwe-upwiz-license-cr-cdn-exp-head',
-              'licenses' => array(
-                 'cr-cdn-exp'
-              )
-        ],
-        // UBC license
-        [
-            'head' => 'mwe-upwiz-license-ubc-head',
-            'licenses' => array(
-                'cr-ubc'
-            )
-        ],
-      ]
-    ]
-  ]
-);
+enableSemantics( 'brothersbrothers.net' );
 
 // It is used on the top page of the UBC Wiki
 $wgAllowSlowParserFunctions = true;
@@ -415,30 +194,6 @@ $wgAllowSiteCSSOnRestrictedPages = filter_var(loadenv('MEDIAWIKI_ALLOW_SITE_CSS_
 
 $wgGroupPermissions['*']['edit'] = filter_var(loadenv('MEDIAWIKI_ALLOW_ANONYMOUS_EDIT', false), FILTER_VALIDATE_BOOLEAN);
 
-# allow admin/sysop class to rename user
-$wgGroupPermissions['sysop']['renameuser'] = true;
-
-# Hide renameuser logs from Special:Log
-$wgFilterLogTypes['renameuser'] = true;
-# Restrict access to renameuser log type.
-# Special:Log/renameuser is accessible only to those with renameuser permission.
-# This should also stop new renameuser logs being added to Special:RecentChanges. Existing rename logs in RecentChanges can be cleared by running "php maintenance/rebuildrecentchanges.php"
-$wgLogRestrictions['renameuser'] = 'renameuser';
-
-if (getenv('SMTP_HOST')) {
-    $wgSMTP['host'] = loadenv('SMTP_HOST');
-    if (getenv('SMTP_HOST_ID')) {
-        $wgSMTP['IDHost'] = loadenv('SMTP_HOST_ID');
-    }
-    $wgSMTP['port'] = loadenv('SMTP_PORT', 25);
-
-    if (getenv('SMTP_USER')) {
-       $wgSMTP['auth'] = true;
-       $wgSMTP['username'] = loadenv('SMTP_USER');
-       $wgSMTP['password'] = loadenv('SMTP_PASSWORD');
-    }
-}
-
 $wgReadOnly = loadenv('MEDIAWIKI_READONLY', null);
 
 $wgLocalisationCacheConf = array(
@@ -450,9 +205,6 @@ $wgLocalisationCacheConf = array(
 );
 
 $wgEnableBotPasswords = filter_var(loadenv('MEDIAWIKI_ENABLE_BOT_PASSWORDS', true), FILTER_VALIDATE_BOOLEAN);
-
-# allow canvas to embed wiki pages
-$wgEditPageFrameOptions = 'allow-from https://canvas.ubc.ca/';
 
 @include('CustomExtensions.php');
 
@@ -494,17 +246,6 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Vi
     // );
 }
 
-
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'WikiEditor') !== false) {
-    # WikiEditor # ref: https://www.mediawiki.org/wiki/Extension:WikiEditor
-
-    # Enables use of WikiEditor by default but still allows users to disable it in preferences
-    $wgDefaultUserOptions['usebetatoolbar'] = 1;
-
-    # Enables link and table wizards by default but still allows users to disable them in preferences
-    $wgDefaultUserOptions['usebetatoolbar-cgd'] = 1;
-}
-
 if (getenv('RESTBASE_URL')) {
     # RESTBase
     # ref: https://www.mediawiki.org/wiki/Extension:VisualEditor#RESTBase_setup_for_switching
@@ -530,88 +271,66 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Ma
     $wgMathFullRestbaseURL= $wgServer . '/api/rest_';
 }
 
-if (getenv('LDAP_SERVER') || getenv('LDAP_BASE_DN') || getenv('LDAP_SEARCH_STRINGS') || getenv('LDAP_SEARCH_ATTRS')) {
-    // load and configure LDAP Provider
-    wfLoadExtension( 'LDAPProvider' );
-
-    // define our LDAP authentication domain
-    $LDAPProviderDomainConfigProvider = function() {
-        $config = [
-            'CWL' => [
-                'connection' => [
-                    "server" => getenv('LDAP_SERVER') ? getenv('LDAP_SERVER') : 'localhost',
-                    "port" => getenv('LDAP_PORT') ? getenv('LDAP_PORT') : 389,
-                    "enctype" => getenv('LDAP_ENCRYPTION_TYPE') ? getenv('LDAP_ENCRYPTION_TYPE') : 'clear',
-                    "user" => getenv('LDAP_PROXY_AGENT') ? getenv('LDAP_PROXY_AGENT') : '',
-                    "pass" => getenv('LDAP_PROXY_PASSWORD') ? getenv('LDAP_PROXY_PASSWORD') : '',
-                    "basedn" => getenv('LDAP_BASE_DN') ? getenv('LDAP_BASE_DN') : 'ou=Users,ou=LOCAL,dc=domain,dc=local',
-                    "userbasedn" => getenv('LDAP_USER_BASE_DN') ? getenv('LDAP_USER_BASE_DN') : 'ou=Users,ou=LOCAL,dc=domain,dc=local',
-                    "searchstring" => getenv('LDAP_SEARCH_STRINGS') ? getenv('LDAP_SEARCH_STRINGS') : '',
-                    "searchattribute" => getenv('LDAP_SEARCH_ATTRS') ? getenv('LDAP_SEARCH_ATTRS') : 'cn',
-                    "usernameattribute" => getenv('LDAP_USERNAME_ATTR') ? getenv('LDAP_USERNAME_ATTR') : 'cn',
-                    "realnameattribute" => getenv('LDAP_REALNAME_ATTR') ? getenv('LDAP_REALNAME_ATTR') : 'displayname',
-                    "emailattribute" => getenv('LDAP_EMAIL_ATTR') ? getenv('LDAP_EMAIL_ATTR') : 'mail',
-                ]
-            ]
-        ];
-
-        return new \MediaWiki\Extension\LDAPProvider\DomainConfigProvider\InlinePHPArray( $config );
-    };
-
-    // load LDAP authentication extensions
-    wfLoadExtension( 'PluggableAuth' );
-    wfLoadExtension( 'LDAPAuthentication2' );
-
-    # do not allow "local" pseudo-domain login against local user db
-    $LDAPAuthentication2AllowLocalLogin = false;
-    $wgPluggableAuth_EnableLocalLogin = false;
-
-    # disable local wiki account creation page
-    $wgGroupPermissions['*']['createaccount'] = false;
-    # allow auto creation
-    $wgGroupPermissions['*']['autocreateaccount'] = true;
-
-    # disable password resets entirely
-    # ref: https://www.mediawiki.org/wiki/Manual:$wgPasswordResetRoutes
-    $wgPasswordResetRoutes = false;
-
-    # enable local properties so users can edit their real name and email
-    # ref: https://www.mediawiki.org/wiki/Extension:PluggableAuth
-    $wgPluggableAuth_EnableLocalProperties = true;
-
-    // extension for UBC-specific authentication
-    if ( filter_var( getenv( 'UBC_AUTH_ENABLED' ), FILTER_VALIDATE_BOOLEAN ) ) {
-        wfLoadExtension( 'UBCAuth' );
-    }
-}
-
-
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Scribunto') !== false) {
     # Scribunto
     wfLoadExtension( 'Scribunto' );
     $wgScribuntoDefaultEngine = 'luastandalone';
 }
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Widgets') !== false) {
-    wfLoadExtension( 'Widgets' );
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Arrays') !== false) {
+    require_once "$IP/extensions/Arrays/Arrays.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Bootstrap') !== false) {
+    require_once "$IP/extensions/Bootstrap/Bootstrap.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'GraphViz') !== false) {
+    require_once "$IP/extensions/GraphViz/GraphViz.php";
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Maps') !== false) {
-    if (loadenv('GOOGLE_MAP_API_KEY')) {
-        $egMapsGMaps3ApiKey = loadenv('GOOGLE_MAP_API_KEY');
-    }
+    require_once "$IP/extensions/Maps/Maps.php";
 }
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'LiquidThreads') !== false) {
-    wfLoadExtension( 'LiquidThreads' );
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'HTMLets') !== false) {
+    require_once "$IP/extensions/HTMLets/HTMLets.php";
 }
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Variables') !== false) {
-    wfLoadExtension( 'Variables' );
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'PageSchemas') !== false) {
+    require_once "$IP/extensions/PageSchemas/PageSchemas.php";
 }
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'RightFunctions') !== false) {
-    require_once "$IP/extensions/RightFunctions/RightFunctions.php";
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticCite') !== false) {
+    require_once "$IP/extensions/SemanticCite/SemanticCite.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticCompoundQueries') !== false) {
+    require_once "$IP/extensions/SemanticCompoundQueries/SemanticCompoundQueries.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticExtraSpecialProperties') !== false) {
+    require_once "$IP/extensions/SemanticExtraSpecialProperties/SemanticExtraSpecialProperties.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticInterlanguageLinks') !== false) {
+    require_once "$IP/extensions/SemanticInterlanguageLinks/SemanticInterlanguageLinks.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticMetaTags') !== false) {
+    require_once "$IP/extensions/SemanticMetaTags/SemanticMetaTags.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticResultFormats') !== false) {
+    require_once "$IP/extensions/SemanticResultFormats/SemanticResultFormats.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Validator') !== false) {
+    require_once "$IP/extensions/Validator/Validator.php";
+}
+
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'xsl') !== false) {
+    require_once "$IP/extensions/xsl/xsl.php";
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'UserPageEditProtection') !== false) {
@@ -625,42 +344,6 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Co
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'DynamicPageList') !== false) {
     wfLoadExtension( 'DynamicPageList' );
-}
-
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'googleAnalytics') !== false && loadenv('GOOGLE_ANALYTICS_UA')) {
-    require_once "$IP/extensions/googleAnalytics/googleAnalytics.php";
-    // Replace xxxxxxx-x with YOUR GoogleAnalytics UA number
-    $wgGoogleAnalyticsAccount = loadenv('GOOGLE_ANALYTICS_UA');
-    // Add HTML code for any additional web analytics (can be used alone or with $wgGoogleAnalyticsAccount)
-    #$wgGoogleAnalyticsOtherCode = '<script type="text/javascript" src="https://analytics.example.com/tracking.js"></script>';
-
-    // Optional configuration (for defaults see googleAnalytics.php)
-    // Store full IP address in Google Universal Analytics (see https://support.google.com/analytics/answer/2763052?hl=en for details)
-    $wgGoogleAnalyticsAnonymizeIP = false;
-    // Array with NUMERIC namespace IDs where web analytics code should NOT be included.
-    #$wgGoogleAnalyticsIgnoreNsIDs = array(500);
-    // Array with page names (see magic word Extension:Google Analytics Integration) where web analytics code should NOT be included.
-    #$wgGoogleAnalyticsIgnorePages = array('ArticleX', 'Foo:Bar');
-    // Array with special pages where web analytics code should NOT be included.
-    $wgGoogleAnalyticsIgnoreSpecials = array( 'Userlogin', 'Userlogout', 'Preferences', 'ChangePassword', 'OATH');
-    // Use 'noanalytics' permission to exclude specific user groups from web analytics, e.g.
-    $wgGroupPermissions['sysop']['noanalytics'] = true;
-    $wgGroupPermissions['bot']['noanalytics'] = true;
-    // To exclude all logged in users give 'noanalytics' permission to 'user' group, i.e.
-    #$wgGroupPermissions['user']['noanalytics'] = true;
-
-    # Google Analyics Metrics
-    $t = loadenv('GOOGLE_ANALYTICS_METRICS_ALLOWED', '*');
-    $wgGoogleAnalyticsMetricsAllowed = $t == '*' ? '*' : explode(',', $t);
-    $wgGoogleAnalyticsMetricsPath = loadenv('GOOGLE_ANALYTICS_METRICS_PATH', NULL);
-    $wgGoogleAnalyticsMetricsViewId = loadenv('GOOGLE_ANALYTICS_METRICS_VIEWID', '');
-}
-
-# setup caliper settings if enabled
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'caliper') !== false && loadenv('CALIPER_HOST') && loadenv('CALIPER_API_KEY')) {
-    $wgCaliperHost = loadenv('CALIPER_HOST');
-    $wgCaliperAPIKey = loadenv('CALIPER_API_KEY');
-    $wgCaliperAppBaseUrl = loadenv('CALIPER_BASE_URL', null);
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'LinkTarget') !== false) {

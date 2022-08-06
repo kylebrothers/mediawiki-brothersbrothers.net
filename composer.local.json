@@ -23,6 +23,7 @@
         "mediawiki/parser-hooks": "~1.6.1",
         "mediawiki/validator": "~2.2.3",
         "mediawiki/maps": "~9.0",
+        "mediawiki/chameleon-skin": "~4.1.0"
         "pear/mail_mime-decode": "1.5.5.2",
         "google/apiclient":"^2.2",
         "imsglobal/caliper": "dev-develop#c7e34e230abc7bbb647f8f94245cb649f6191bcd as 1.2.0"
