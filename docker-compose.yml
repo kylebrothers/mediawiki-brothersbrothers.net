@@ -38,22 +38,10 @@ services:
       - MEDIAWIKI_UPGRADE_KEY=upgradekey
       # uncomment 'MEDIAWIKI_ENABLE_SSL' to enable SSL support
       # - MEDIAWIKI_ENABLE_SSL=true
-      - MEDIAWIKI_EXTENSIONS=VisualEditor,WikiEditor,ParserFunctions,Cite,TemplateData,Scribunto,InputBox,Widgets,Maps,Math,LiquidThreads,Variables,RightFunctions,PageInCat,CategoryTree,LabeledSectionTransclusion,UserPageEditProtection,Quiz,UploadWizard,Collection,DynamicPageList,EmbedPage,UWUBCMessages,googleAnalytics,Renameuser,caliper,DeleteBatch,LinkTarget,HitCounters,GTag
+      - MEDIAWIKI_EXTENSIONS=VisualEditor,WikiEditor,ParserFunctions,Cite,TemplateData,Scribunto,InputBox,Maps,Math,LiquidThreads,Variables,RightFunctions,PageInCat,CategoryTree,Collection,DynamicPageList,Renameuser,DeleteBatch,LinkTarget,HitCounters,Arrays,HeaderTabs,HTMLets,ImageMap,PageSchemas,XSL
       - MEDIAWIKI_ALLOW_SITE_CSS_ON_RESTRICTED_PAGES=true
       - PARSOID_DOMAIN=localhost
       - RESTBASE_URL=http://nodeservices:7231
-      - LDAP_DOMAIN=CWL
-      - LDAP_SERVER=ldap
-      - LDAP_ENCRYPTION_TYPE=clear
-      - LDAP_SEARCH_ATTRS=cn
-      - LDAP_PROXY_AGENT=cn=admin,dc=example,dc=org
-      - LDAP_PROXY_PASSWORD=admin
-      - LDAP_BASE_DN=dc=example,dc=org
-      - LDAP_USER_BASE_DN=dc=example,dc=org
-      - LDAP_USERNAME_ATTR=cn
-      - LDAP_REALNAME_ATTR=displayname
-      - LDAP_EMAIL_ATTR=mail
-      - UBC_AUTH_ENABLED=true
       # FIXME skip domain checking in Parsoid. used in our own ParsoidHandler_custom_xxxx.php.
       # in our Apache conf file, we are redirecting requests to restbase with domain "localhost",
       # but the Parsoid domain is not configurable.  hence disable the check.
@@ -107,15 +95,6 @@ services:
       - LOG_LEVEL=debug
     volumes:
       - ./.data/services:/data
-  ldap:
-    image: osixia/openldap:1.1.9
-    command: --copy-service
-    ports:
-      - 1389:389
-    volumes:
-      - ./dev/ldapadd_ubcedu.ldif:/container/service/slapd/assets/config/bootstrap/ldif/custom/ldapadd_ubcedu.ldif
-      - ./.data/ldap:/var/lib/ldap
-      - ./.data/slapd.d:/etc/ldap/slapd.d
 #  memcached:
 #    image: memcached:1.5-alpine
   redis:

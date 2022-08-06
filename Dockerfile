@@ -64,7 +64,7 @@ RUN curl -L https://getcomposer.org/composer-1.phar --output composer.phar \
     && php composer.phar install --no-dev
 
 RUN EXTS=`curl https://extdist.wmflabs.org/dist/extensions/ | awk 'BEGIN { FS = "\""  } ; {print $2}'` \
-    && for i in VisualEditor Scribunto LiquidThreads Cite WikiEditor LDAPProvider PluggableAuth LDAPAuthentication2 ParserFunctions TemplateData InputBox Widgets Variables RightFunctions PageInCat CategoryTree LabeledSectionTransclusion UserPageEditProtection Collection googleAnalytics DeleteBatch LinkTarget HitCounters Arrays HeaderTabs HTMLets ImageMap PageSchemas XSL; do \
+    && for i in VisualEditor Scribunto LiquidThreads Cite WikiEditor PluggableAuth ParserFunctions TemplateData InputBox Widgets Variables RightFunctions PageInCat CategoryTree LabeledSectionTransclusion UserPageEditProtection Collection googleAnalytics DeleteBatch LinkTarget HitCounters Arrays HeaderTabs HTMLets ImageMap PageSchemas XSL; do \
       FILENAME=`echo "$EXTS" | grep ^${i}-REL${WIKI_VERSION_STR}`; \
       echo "Installing https://extdist.wmflabs.org/dist/extensions/$FILENAME"; \
       curl -Ls https://extdist.wmflabs.org/dist/extensions/$FILENAME | tar xz -C /var/www/html/extensions; \
@@ -91,8 +91,8 @@ RUN EXTS=`curl https://extdist.wmflabs.org/dist/extensions/ | awk 'BEGIN { FS = 
     && mkdir -p /var/www/html/extensions/caliper \
     && curl -Ls https://github.com/ubc/mediawiki-extensions-caliper/archive/v2.0.3.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/caliper \
     && echo "Installing https://github.com/ubc/mediawiki-extensions-ubcauth/archive/master.tar.gz" \
-    && mkdir -p /var/www/html/extensions/UBCAuth\
-    && curl -Ls https://github.com/ubc/mediawiki-extensions-ubcauth/archive/master.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/UBCAuth \
+#    && mkdir -p /var/www/html/extensions/UBCAuth\
+#    && curl -Ls https://github.com/ubc/mediawiki-extensions-ubcauth/archive/master.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/UBCAuth \
     && echo "Installing https://github.com/ubc/mediawiki-extensions-AutoCreatedUserRedirector/archive/master.tar.gz" \
     && mkdir -p /var/www/html/extensions/AutoCreatedUserRedirector \
     && curl -Ls https://github.com/ubc/mediawiki-extensions-AutoCreatedUserRedirector/archive/master.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/AutoCreatedUserRedirector \
