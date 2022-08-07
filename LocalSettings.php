@@ -255,7 +255,7 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Ar
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Bootstrap') !== false) {
-    require_once "$IP/extensions/Bootstrap/Bootstrap.php";
+    wfLoadExtension( 'Bootstrap' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'DataTransfer') !== false) {
@@ -268,6 +268,7 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'He
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'HTMLets') !== false) {
     require_once "$IP/extensions/HTMLets/HTMLets.php";
+    $wgHTMLetsDirectory = "$IP/extensions/HTMLets";
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'ImageMap') !== false) {
@@ -275,7 +276,7 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Im
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Maps') !== false) {
-    require_once "$IP/extensions/Maps/Maps.php";
+    wfLoadExtension( 'Maps' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'PageForms') !== false) {
@@ -283,7 +284,7 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Pa
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'PageSchemas') !== false) {
-    require_once "$IP/extensions/PageSchemas/PageSchemas.php";
+    wfLoadExtension( "PageSchemas" );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'PageForms') !== false) {
@@ -295,35 +296,35 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Sc
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticCite') !== false) {
-    require_once "$IP/extensions/SemanticCite/SemanticCite.php";
+    wfLoadExtension( 'SemanticCite' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticCompoundQueries') !== false) {
-    require_once "$IP/extensions/SemanticCompoundQueries/SemanticCompoundQueries.php";
+    wfLoadExtension( 'SemanticCompoundQueries' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticExtraSpecialProperties') !== false) {
-    require_once "$IP/extensions/SemanticExtraSpecialProperties/SemanticExtraSpecialProperties.php";
+    wfLoadExtension( 'SemanticExtraSpecialProperties' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticInterlanguageLinks') !== false) {
-    require_once "$IP/extensions/SemanticInterlanguageLinks/SemanticInterlanguageLinks.php";
+    wfLoadExtension( 'SemanticInterlanguageLinks' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticMediaWiki') !== false) {
-    require_once "$IP/extensions/SemanticMediaWiki/SemanticMediaWiki.php";
+    wfLoadExtension( 'SemanticMediaWiki' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticMetaTags') !== false) {
-    require_once "$IP/extensions/SemanticInterMetaTags/SemanticMetaTags.php";
+    wfLoadExtension( 'SemanticMetaTags' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticResultFormats') !== false) {
-    require_once "$IP/extensions/SemanticResultFormats/SemanticResultFormats.php";
+    wfLoadExtension( 'SemanticResultFormats' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticScribunto') !== false) {
-    require_once "$IP/extensions/SemanticScribunto/SemanticScribunto.php";
+    wfLoadExtension( 'SemanticScribunto' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Validator') !== false) {
@@ -331,7 +332,7 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Va
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'xsl') !== false) {
-    require_once "$IP/extensions/xsl/xsl.php";
+    wfLoadExtension( 'XSL' );
 }
 
 @include('/conf/CustomSettings.php');
