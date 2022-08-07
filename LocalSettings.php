@@ -63,9 +63,9 @@ $wgEmailAuthentication = true;
 ## Database settings
 $wgDBtype = loadenv('MEDIAWIKI_DB_TYPE', "mysql");
 $wgDBserver = loadenv('MEDIAWIKI_DB_HOST', "db");
-$wgDBname = loadenv('MEDIAWIKI_DB_NAME', "wikidb");
+$wgDBname = loadenv('MEDIAWIKI_DB_NAME', "mediawiki");
 $wgDBuser = loadenv('MEDIAWIKI_DB_USER', "root");
-$wgDBpassword = loadenv('MEDIAWIKI_DB_PASSWORD', "mediawikipass");
+$wgDBpassword = loadenv('MEDIAWIKI_DB_PASSWORD', "password");
 
 # MySQL specific settings
 $wgDBprefix = loadenv('MEDIAWIKI_DB_PREFIX', "");
