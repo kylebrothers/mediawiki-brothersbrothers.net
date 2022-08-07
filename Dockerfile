@@ -73,7 +73,7 @@ RUN EXTS=`curl https://extdist.wmflabs.org/dist/extensions/ | awk 'BEGIN { FS = 
     done \
     && echo "Installing https://extdist.wmflabs.org/dist/extensions/Arrays-REL1_35-03d4309.tar.gz" \
     && mkdir /var/www/html/extensions/Arrays \
-    && curl -Ls https://extdist.wmflabs.org/dist/extensions/Arrays-REL1_35-03d4309.tar.gz | tar xzf --strip=1 -C /var/www/html/extensions/Arrays 
+    && curl -Ls https://extdist.wmflabs.org/dist/extensions/Arrays-REL1_35-03d4309.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/Arrays 
 #    && echo "Installing https://github.com/ubc/mediawiki-extensions-UploadWizard/archive/mw1.35.tar.gz" \
 #    && mkdir /var/www/html/extensions/UploadWizard \
 #    && curl -Ls https://github.com/ubc/mediawiki-extensions-UploadWizard/archive/mw1.35.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/UploadWizard \
