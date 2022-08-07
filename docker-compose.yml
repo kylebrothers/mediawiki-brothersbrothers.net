@@ -32,7 +32,7 @@ services:
       # the Parsoid domain is not configurable. so we needed to disable the check as we are using "localhost" in Restbase redirection
       - ./ParsoidHandler_custom_1_35.php:/var/www/html/vendor/wikimedia/parsoid/extension/src/Rest/Handler/ParsoidHandler.php
     environment:
-      - MEDIAWIKI_SITE_SERVER=http://localhost:8080
+      - MEDIAWIKI_SITE_SERVER=http://192.168.0.132:8080
       - MEDIAWIKI_SITE_NAME=BrothersBrothers
       - MEDIAWIKI_DB_HOST=db
       - MEDIAWIKI_DB_PASSWORD=password
