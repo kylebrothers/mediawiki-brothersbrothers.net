@@ -1,4 +1,7 @@
 <?php
+
+error_reporting( E_ALL );
+ini_set( 'display_errors', 1 );
 # See includes/DefaultSettings.php for all configurable settings
 # and their default values, but don't forget to make changes in _this_
 # file, not there.
