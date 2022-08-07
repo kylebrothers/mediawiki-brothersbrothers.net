@@ -36,7 +36,7 @@ $wgScriptPath = loadenv('MEDIAWIKI_SCRIPT_PATH');
 $wgArticlePath = "/$1";
 
 ## The protocol and server name to use in fully-qualified URLs
-$wgServer = loadenv('MEDIAWIKI_SITE_SERVER', '//localhost');
+$wgServer = loadenv('MEDIAWIKI_SITE_SERVER', '//192.168.0.132');
 
 ## The URL path to static resources (images, scripts, etc.)
 $wgResourceBasePath = $wgScriptPath;
@@ -146,8 +146,8 @@ $wgDiff3 = "/usr/bin/diff3";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'vector', 'monobook':
-## $wgDefaultSkin = loadenv('MEDIAWIKI_DEFAULT_SKIN', "chameleon");
-$wgDefaultSkin = loadenv('MEDIAWIKI_DEFAULT_SKIN', "vector");
+$wgDefaultSkin = loadenv('MEDIAWIKI_DEFAULT_SKIN', "chameleon");
+## $wgDefaultSkin = loadenv('MEDIAWIKI_DEFAULT_SKIN', "vector");
 
 $egChameleonLayoutFile=__DIR__ . '/skins/chameleon/layouts/fixedhead.xml';
 
