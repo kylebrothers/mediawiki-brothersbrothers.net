@@ -7,6 +7,7 @@
         }
     ],
     "require": {
+        "pear/mail_mime-decode": "1.5.5.2",
         "mediawiki/bootstrap": "~4.6.0",
         "mediawiki/data-transfer": "~1.4",
         "mediawiki/maps": "~9.0",
