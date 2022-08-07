@@ -143,7 +143,8 @@ $wgDiff3 = "/usr/bin/diff3";
 
 ## Default skin: you can change the default skin. Use the internal symbolic
 ## names, ie 'vector', 'monobook':
-$wgDefaultSkin = loadenv('MEDIAWIKI_DEFAULT_SKIN', "chameleon");
+## $wgDefaultSkin = loadenv('MEDIAWIKI_DEFAULT_SKIN', "chameleon");
+$wgDefaultSkin = loadenv('MEDIAWIKI_DEFAULT_SKIN', "vector");
 
 $egChameleonLayoutFile=__DIR__ . '/skins/chameleon/layouts/fixedhead.xml';
 
