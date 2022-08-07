@@ -6,11 +6,13 @@ services:
       - MYSQL_ROOT_PASSWORD=password
     volumes:
       - ./.data/db:/var/lib/mysql
+    restart: always
     ports:
       - 3306:3306
   web: &app
     image: kylebrothers/mywiki:latest
     build: .
+    restart: always
     ports:
       - 8080:80
     # use the links section if you want to use a container for a database.
@@ -69,6 +71,7 @@ services:
       # - CALIPER_LDAP_ACTOR_HOMEPAGE=http://media_wiki_ldap_homepage
   job_runner:
     <<: *app
+    restart: always
     command: php /var/www/html/maintenance/runJobs.php --wait
     ports:
       - 8081:80
@@ -88,6 +91,7 @@ services:
 #      - PARSOID_URL=http://parsoid:8000
   nodeservices:
     image: ubcctlt/mediawiki-node-services
+    restart: always
     ports:
       - 7231:7231
     environment:
@@ -100,3 +104,4 @@ services:
 #    image: memcached:1.5-alpine
   redis:
     image: redis:6.0-alpine
+    restart: always
