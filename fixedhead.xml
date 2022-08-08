@@ -22,24 +22,25 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 @since 1.0
 @ingroup Skins
 -->
-<structure>
+<structure xmlns="https://ProfessionalWiki.github.io/chameleon/schema/3.5/layout.rng">
 
 	<component type="NavbarHorizontal" fixed="1">
 		<modification type="ShowOnlyFor" permission="edit"></modification>
-		<component type="NavMenu" flatten="navigation"></component>
-		<component type="PageTools" hideSelectedNameSpace="1"></component>
-		<component type="SearchBar" position="right"></component>
-		<component type="PersonalTools" position="right"></component>
+		<component type="NavMenu" flatten="navigation"/>
+		<component type="Menu" message="secondary-menu"/>
+		<component type="PageTools" class="flex-row" position="right" hideSelectedNameSpace="yes"/>
+		<component type="SearchBar" class="order-first order-cmln-0" position="right" buttons="go"/>
+		<component type="PersonalTools" position="right"/>
 	</component>
 
 	<component type="NavbarHorizontal" fixed="1">
 		<modification type="HideFor" permission="edit"></modification>
-		<component type="NavMenu" flatten="navigation"></component>
-		<component type="SearchBar" position="right"></component>
-		<component type="PersonalTools" position="right"></component>
+		<component type="NavMenu" flatten="navigation"/>
+		<component type="SearchBar" class="order-first order-cmln-0" position="right" buttons="go"/>
+		<component type="PersonalTools" position="right"/>
 	</component>
 
-	<grid>
+	<grid class="flex-fill">
 		<row>
 			<cell span="12">
 				<component type="SiteNotice"></component>
@@ -52,26 +53,23 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 			</cell>
 		</row>
 
+	<grid class="mb-2 mt-4" mode="fluid">
 		<row>
 			<modification type="ShowOnlyFor" permission="edit"></modification>
-			<cell span="12">
-				<component type="ToolbarHorizontal"></component>
+			<cell>
+				<component type="Toolbox" flatten="no" class="dropup"/>
+				<component type="LangLinks" flatten="no" class="dropup"/>
 			</cell>
 		</row>
 
 		<row>
 			<modification type="ShowOnlyFor" permission="edit"></modification>
-			<cell span="12">
+			<cell>
 				<component type="FooterInfo"></component>
-			</cell>
-		</row>
-
-		<row>
-			<modification type="ShowOnlyFor" permission="edit"></modification>
-			<cell span="6">
 				<component type="FooterPlaces"></component>
 			</cell>
-			<cell span="6">
+			<modification type="ShowOnlyFor" permission="edit"></modification>
+			<cell>
 				<component type="FooterIcons"></component>
 			</cell>
 		</row>
