@@ -53,8 +53,8 @@ COPY simplex-variables.less /var/www/html/
 COPY simplex-bootswatch.less /var/www/html/
 COPY yeti-variables.less /var/www/html/
 COPY yeti-bootswatch.less /var/www/html/
-COPY clean.xml /var/www/html/skins/chameleon/layouts/clean.xml
-COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/fixedhead.xml
+COPY clean.xml /var/www/html/skins/chameleon/layouts/
+COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/
 
 COPY mediawiki.conf /etc/apache2/
 RUN echo "Include /etc/apache2/mediawiki.conf" >> /etc/apache2/apache2.conf \
