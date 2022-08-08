@@ -13,6 +13,7 @@ services:
     image: kylebrothers/mywiki:latest
     build: .
     restart: always
+    command: /bin/sh -c "/var/www/html/maintenance/SMWUpdater.sh"
     ports:
       - 8080:80
     # use the links section if you want to use a container for a database.

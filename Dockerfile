@@ -45,8 +45,8 @@ COPY php.ini /usr/local/etc/php/
 
 #This is a Bash script that will be used by the RunJobs container to run a few initial maintenance commands in the newly
 #created container, including the SemanticMediaWiki update script
-#COPY RunJobsScript.sh /var/www/html/maintenance/
-#RUN chmod a+rwx /var/www/html/maintenance/RunJobsScript.sh
+COPY SMWUpdater.sh /var/www/html/maintenance/
+RUN chmod a+rwx /var/www/html/maintenance/SMWUpdater.sh
 
 COPY mediawiki.conf /etc/apache2/
 RUN echo "Include /etc/apache2/mediawiki.conf" >> /etc/apache2/apache2.conf \

@@ -239,13 +239,4 @@ mkdir -p images
 chown -R www-data: cache
 chmod 755 images
 
-# This is get SemanticMediaWiki to recognize whether it is set up correctly
-FILE=/var/www/html/extensions/SemanticMediaWiki/.smw.json
-if [ -f "$FILE" ]; then
-    echo "$FILE exists."
-else 
-    echo "$FILE does not exist."
-    /usr/local/bin/php /var/www/html/maintenance/update.php
-fi
-
 exec "$@"
