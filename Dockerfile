@@ -46,6 +46,7 @@ COPY php.ini /usr/local/etc/php/
 #This is a Bash script that will be used by the RunJobs container to run a few initial maintenance commands in the newly
 #created container, including the SemanticMediaWiki update script
 COPY RunJobsScript.sh /var/www/html/maintenance/
+RUN chmod a+x /var/www/html/maintenance/RunJobsScript.sh
 
 #CSS files that I customized. I'm actually not sure if MediaWiki is actually using any of these
 COPY simplex-variables.less /var/www/html/
