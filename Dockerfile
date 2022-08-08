@@ -112,7 +112,7 @@ COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/
 #first be commented for the first run, then the command should be run: docker exec [CONTAINER ID] /var/www/html/maintenance/update.php
 #Then the new .smw.json file that is created should be copied to this file location. Maybe someday I'll figure out a way to automate
 #Running the update.php program the first time the container is created.
-#COPY .smw.json /var/www/html/extensions/SemanticMediaWiki/.smw.json
+COPY .smw.json /var/www/html/extensions/SemanticMediaWiki/.smw.json
 
 RUN mkdir -p /data \
    && chmod a+x /var/www/html/extensions/Scribunto/includes/engines/LuaStandalone/binaries/lua5_1_5_linux_64_generic/lua
