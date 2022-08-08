@@ -53,6 +53,8 @@ COPY simplex-variables.less /var/www/html/
 COPY simplex-bootswatch.less /var/www/html/
 COPY yeti-variables.less /var/www/html/
 COPY yeti-bootswatch.less /var/www/html/
+COPY clean.xml /var/www/html/skins/chameleon/layouts/clean.xml
+COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/fixedhead.xml
 
 COPY mediawiki.conf /etc/apache2/
 RUN echo "Include /etc/apache2/mediawiki.conf" >> /etc/apache2/apache2.conf \
@@ -73,8 +75,6 @@ COPY ParsoidHandler_custom_1_35.php /var/www/html/vendor/wikimedia/parsoid/exten
 #RUN curl -L https://getcomposer.org/installer | php \
 RUN curl -L https://getcomposer.org/composer-1.phar --output composer.phar \
     && php composer.phar install --no-dev
-
-COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/fixedhead.xml
 
 RUN EXTS=`curl https://extdist.wmflabs.org/dist/extensions/ | awk 'BEGIN { FS = "\""  } ; {print $2}'` \
     && for i in Arrays HeaderTabs HTMLets ImageMap PageSchemas ParserFunctions Scribunto XSL; do \
