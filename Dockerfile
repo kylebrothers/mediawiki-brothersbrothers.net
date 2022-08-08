@@ -48,14 +48,6 @@ COPY php.ini /usr/local/etc/php/
 COPY RunJobsScript.sh /var/www/html/maintenance/
 RUN chmod a+rwx /var/www/html/maintenance/RunJobsScript.sh
 
-#CSS files that I customized. I'm actually not sure if MediaWiki is actually using any of these
-COPY simplex-variables.less /var/www/html/
-COPY simplex-bootswatch.less /var/www/html/
-COPY yeti-variables.less /var/www/html/
-COPY yeti-bootswatch.less /var/www/html/
-COPY clean.xml /var/www/html/skins/chameleon/layouts/
-COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/
-
 COPY mediawiki.conf /etc/apache2/
 RUN echo "Include /etc/apache2/mediawiki.conf" >> /etc/apache2/apache2.conf \
     && rm /etc/apache2/sites-enabled/000-default.conf \
@@ -115,6 +107,10 @@ RUN EXTS=`curl https://extdist.wmflabs.org/dist/extensions/ | awk 'BEGIN { FS = 
 #    && echo "Installing patched Math extension from https://github.com/ubc/mediawiki-extensions-Math/archive/REL1_35.tar.gz" \
 #    && mkdir -p /var/www/html/extensions/Math \
 #    && curl -Ls https://github.com/ubc/mediawiki-extensions-Math/archive/REL1_35.tar.gz | tar xz --strip=1 -C /var/www/html/extensions/Math
+
+#CSS files that I customized. I'm actually not sure if MediaWiki is actually using any of these
+COPY clean.xml /var/www/html/skins/chameleon/layouts/
+COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/
 
 
 RUN mkdir -p /data \
