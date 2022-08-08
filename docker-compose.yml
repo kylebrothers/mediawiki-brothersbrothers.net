@@ -72,7 +72,7 @@ services:
   job_runner:
     <<: *app
     restart: always
-    command: /bin/sh -c "/var/www/html/maintenance/RunJobsScript.sh"
+    command: php /var/www/html/maintenance/runJobs.php --wait
     ports:
       - 8081:80
 
