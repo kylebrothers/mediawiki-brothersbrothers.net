@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+<?xml-model href="https://ProfessionalWiki.github.io/chameleon/schema/3.4/layout.rng" schematypens="http://relaxng.org/ns/structure/1.0"?>
 This file is part of the MediaWiki skin Chameleon.
 
 @copyright 2013 - 2014, Stephan Gambke
