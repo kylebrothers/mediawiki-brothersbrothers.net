@@ -43,6 +43,10 @@ RUN curl -L https://releases.wikimedia.org/mediawiki/$WIKI_VERSION_MAJOR_MINOR/m
 
 COPY php.ini /usr/local/etc/php/
 
+#This is a Bash script that will be used by the RunJobs container to run a few initial maintenance commands in the newly
+#created container, including the SemanticMediaWiki update script
+COPY RunJobsScript.sh /var/www/html/maintenance/
+
 COPY mediawiki.conf /etc/apache2/
 RUN echo "Include /etc/apache2/mediawiki.conf" >> /etc/apache2/apache2.conf \
     && rm /etc/apache2/sites-enabled/000-default.conf \
