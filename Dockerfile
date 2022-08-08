@@ -47,6 +47,12 @@ COPY php.ini /usr/local/etc/php/
 #created container, including the SemanticMediaWiki update script
 COPY RunJobsScript.sh /var/www/html/maintenance/
 
+#CSS files that I customized. I'm actually not sure if MediaWiki is actually using any of these
+COPY simplex-variables.less /var/www/html/
+COPY simplex-bootswatch.less /var/www/html/
+COPY yeti-variables.less /var/www/html/
+COPY yeti-bootswatch.less /var/www/html/
+
 COPY mediawiki.conf /etc/apache2/
 RUN echo "Include /etc/apache2/mediawiki.conf" >> /etc/apache2/apache2.conf \
     && rm /etc/apache2/sites-enabled/000-default.conf \
