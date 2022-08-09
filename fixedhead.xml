@@ -69,10 +69,14 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 				<component type="FooterInfo">
 					<modification type="ShowOnlyFor" permission="edit"/>
 				</component>
-				<component type="FooterPlaces"/>
+				<component type="FooterPlaces">
+					<modification type="ShowOnlyFor" permission="edit"/>
+				</component>
 			</cell>
 			<cell>
-				<component type="FooterIcons" class="justify-content-end"/>
+				<component type="FooterIcons" class="justify-content-end">
+					<modification type="ShowOnlyFor" permission="edit"/>
+				</component>
 			</cell>
 		</row>
 	</grid>
