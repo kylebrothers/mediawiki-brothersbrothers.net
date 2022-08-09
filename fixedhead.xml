@@ -55,6 +55,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 
 	<grid class="mb-2 mt-4" mode="fluid">
 		<row>
+			<modification type="ShowOnlyFor" permission="edit"/>
 			<cell>
 				<component type="NavbarHorizontal" collapsible="no" class="small mb-2" >
 					<component type="Toolbox" flatten="no" class="dropup"/>
@@ -64,6 +65,7 @@ with this program. If not, see <http://www.gnu.org/licenses/>.
 		</row>
 
 		<row>
+		<modification type="ShowOnlyFor" permission="edit"/>
 			<cell>
 				<component type="FooterInfo"/>
 				<component type="FooterPlaces"/>
