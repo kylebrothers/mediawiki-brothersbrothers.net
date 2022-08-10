@@ -337,6 +337,7 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'xs
 
 $wgPFEnableStringFunctions = true;
 $wgGroupPermissions['user']['editinterface'] = true;
+$wgUseSiteJs = true;
 
 @include('/conf/CustomSettings.php');
 
