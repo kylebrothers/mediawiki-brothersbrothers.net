@@ -339,6 +339,9 @@ $wgPFEnableStringFunctions = true;
 $wgGroupPermissions['user']['editinterface'] = true;
 $wgUseSiteJs = true;
 
+## This sets the default for all pages to not be indexed by Google and other sites
+$wgDefaultRobotPolicy = 'noindex,nofollow';
+
 @include('/conf/CustomSettings.php');
 
 if (filter_var(loadenv('DEBUG', false), FILTER_VALIDATE_BOOLEAN)) {
