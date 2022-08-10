@@ -335,6 +335,8 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'xs
     wfLoadExtension( 'XSL' );
 }
 
+$wgPFEnableStringFunctions = true;
+
 @include('/conf/CustomSettings.php');
 
 if (filter_var(loadenv('DEBUG', false), FILTER_VALIDATE_BOOLEAN)) {
