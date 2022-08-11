@@ -115,8 +115,8 @@ COPY fixedhead.xml /var/www/html/skins/chameleon/layouts/
 #Running the update.php program the first time the container is created.
 COPY .smw.json /var/www/html/extensions/SemanticMediaWiki/.smw.json
 
-RUN mkdir -p /data \
-   && chmod a+x /var/www/html/extensions/Scribunto/includes/engines/LuaStandalone/binaries/lua5_1_5_linux_64_generic/lua
+RUN mkdir -p /data
+#   && chmod a+x /var/www/html/extensions/Scribunto/includes/engines/LuaStandalone/binaries/lua5_1_5_linux_64_generic/lua
 #   && chmod a+rw /var/www/html/extensions/Widgets/compiled_templates
 
 VOLUME /data

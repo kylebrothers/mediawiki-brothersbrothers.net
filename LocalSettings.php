@@ -157,7 +157,7 @@ $wgRawHtml = true;
 enableSemantics( 'brothersbrothers.net' );
 
 // It is used on the top page of the UBC Wiki
-$wgAllowSlowParserFunctions = true;
+#$wgAllowSlowParserFunctions = true;
 
 // enable categories for upload dialog
 $wgUploadDialog = [
@@ -287,7 +287,7 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Pa
     wfLoadExtension( "PageSchemas" );
 }
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'PageForms') !== false) {
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'ParserFunctions') !== false) {
     wfLoadExtension( 'ParserFunctions' );
 }
 
