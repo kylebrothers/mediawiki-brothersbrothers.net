@@ -212,17 +212,17 @@ $wgEnableBotPasswords = filter_var(loadenv('MEDIAWIKI_ENABLE_BOT_PASSWORDS', tru
 
 # some sensible defaults
 
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'VisualEditor') !== false) {
+# if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'VisualEditor') !== false) {
     # VisualEditor
     # ref: https://www.mediawiki.org/wiki/Extension:VisualEditor
-    wfLoadExtension( 'VisualEditor' );
-    $wgGroupPermissions['*']['writeapi'] = true;
+#    wfLoadExtension( 'VisualEditor' );
+#    $wgGroupPermissions['*']['writeapi'] = true;
     // Optional: Set VisualEditor as the default for anonymous users
     // otherwise they will have to switch to VE
     // $wgDefaultUserOptions['visualeditor-editor'] = "visualeditor";
 
     // Don't allow users to disable it
-    $wgHiddenPrefs[] = 'visualeditor-enable';
+#    $wgHiddenPrefs[] = 'visualeditor-enable';
 
     // OPTIONAL: Enable VisualEditor's experimental code features
     #$wgDefaultUserOptions['visualeditor-enable-experimental'] = 1;
