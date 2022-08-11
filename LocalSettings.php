@@ -154,8 +154,6 @@ $egChameleonLayoutFile=__DIR__ . '/skins/chameleon/layouts/fixedhead.xml';
 #Allow full HTML on pages
 $wgRawHtml = true;
 
-enableSemantics( 'brothersbrothers.net' );
-
 // It is used on the top page of the UBC Wiki
 #$wgAllowSlowParserFunctions = true;
 
@@ -250,6 +248,11 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Vi
     // );
 }
 
+if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticMediaWiki') !== false) {
+    wfLoadExtension( 'SemanticMediaWiki' );
+    enableSemantics( '192.168.0.132:8080' );
+}
+
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Arrays') !== false) {
     wfLoadExtension( 'Arrays' );
 }
@@ -309,10 +312,6 @@ if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'Se
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticInterlanguageLinks') !== false) {
     wfLoadExtension( 'SemanticInterlanguageLinks' );
-}
-
-if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticMediaWiki') !== false) {
-    wfLoadExtension( 'SemanticMediaWiki' );
 }
 
 if (getenv('MEDIAWIKI_EXTENSIONS') && strpos(getenv('MEDIAWIKI_EXTENSIONS'), 'SemanticMetaTags') !== false) {
